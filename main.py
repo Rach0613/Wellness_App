@@ -8,9 +8,16 @@ import json
 import glob
 from datetime import datetime
 from pathlib import Path
+from abc import ABC, abstractmethod
 import random
 
 Builder.load_file('design.kv')
+
+
+class AbstractScreen(ABC, Screen):
+    @abstractmethod
+    def on_enter(self):
+        pass
 
 
 class LoginScreen(Screen):
@@ -56,15 +63,23 @@ class ForgotPasswordScreenSuccess(Screen):
 
 class SignUpScreen(Screen):
     def add_user(self, uname, pword):
-        with open("users.json") as file:
-            users = json.load(file)
+        try:
+            with open("users.json") as file:
+                users = json.load(file)
+        except FileNotFoundError:
+            print("The file is NOT FOUND in the directory!. Creating a new file.")
+            users = {}
 
         users[uname] = {'username': uname, 'password': pword,
                         'created': datetime.now().strftime("%Y-%m-%d %H-%M-%S")}
         print(users)
 
-        with open("users.json", "w") as file:
-            json.dump(users, file)
+        try:
+            with open("users.json", "w") as file:
+                json.dump(users, file)
+        except (Exception,):
+            pass
+
         self.manager.current = "sign_up_screen_success"
 
 
@@ -90,7 +105,7 @@ class LoginScreenSuccess(Screen):
                 quotes = file.readlines()
             self.ids.quote.text = random.choice(quotes)
         else:
-            self.ids.quote.text = "Please try another feeling !"
+            self.ids.quote.text = "Please try another feeling!"
 
 
 class ImageButton(ButtonBehavior, HoverBehavior, Image):

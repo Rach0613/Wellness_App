@@ -48,22 +48,32 @@
     GridLayout:
         cols: 1
         padding: 15, 15
-        spacing: 20, 20
+        spacing: 15, 15
         Label:
             text: 'Forgot Password ?'
             font_size: '20sp'
         TextInput:
             id: forgot_username
             hint_text: 'Enter your username'
-        Button:
-            text: 'Retrieve Password'
-            on_press: root.validate_user(root.ids.forgot_username.text)
+        RelativeLayout:
+            Button:
+                text: 'Retrieve Password'
+                on_press: root.validate_user(root.ids.forgot_username.text)
+                size_hint: 0.3, 0.5
+                pos_hint:{'center_x': 0.5, 'center_y': 0.6}
         Label:
             id: forgot_password
             text: ""
-        Button:
-            text: 'Go Back to Login'
-            on_press: root.go_back_to_login()
+        RelativeLayout:
+            size_hint: 0.3, 0.5
+            pos_hint:{'center_x': 0.5, 'center_y': 0.6}
+            Button:
+                text: 'Go Back to Login'
+                background_color: 1, 1, 1, 0
+                opacity: 1 if self.state == "normal" else 0.5
+                color: 0.1, 0.7, 1, 1
+
+                on_press: root.go_back_to_login()
 
 <ForgotPasswordScreenSuccess>:
     GridLayout:
@@ -72,6 +82,8 @@
             text: "Password Retrival Successful!!"
         Button:
             text: "Login Page"
+            size_hint: 0.4, 0.1
+
             on_press: root.go_back_to_login()
 
 <SignUpScreen>:
@@ -98,6 +110,9 @@
             text: "Sign up is successful !"
         Button:
             text: "Login page"
+            background_color: 1, 1, 1, 0
+            opacity: 1 if self.state == "normal" else 0.5
+            color: 0.1, 0.7, 1, 1
             on_press: root.go_to_login()
 
 <LoginScreenSuccess>:
