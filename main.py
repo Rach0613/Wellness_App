@@ -8,16 +8,9 @@ import json
 import glob
 from datetime import datetime
 from pathlib import Path
-from abc import ABC, abstractmethod
 import random
 
 Builder.load_file('design.kv')
-
-
-class AbstractScreen(ABC, Screen):
-    @abstractmethod
-    def on_enter(self):
-        pass
 
 
 class LoginScreen(Screen):
