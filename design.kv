@@ -128,9 +128,10 @@
                 pos_hint: {"center_x": 0.93, "center_y": 0.8}
         Label:
             text: "How do you feel today?"
+            font_size: "20sp"
         TextInput:
             id: feeling
-            hint_text: "Things to try: happy, sad, unloved, anger..."
+            hint_text: "Things to try: happy, sad, unloved, angry..."
         Button:
             text: "Enlighten me"
             on_press: root.get_quote(root.ids.feeling.text)

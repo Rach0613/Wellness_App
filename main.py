@@ -9,8 +9,22 @@ import glob
 from datetime import datetime
 from pathlib import Path
 import random
+from abc import ABC, abstractmethod
+
 
 Builder.load_file('design.kv')
+
+
+class Base1(ABC):
+    @abstractmethod
+    def method_from_base(self):
+        pass
+
+
+class Base2(ABC):
+    @abstractmethod
+    def method_from_base2(self):
+        pass
 
 
 class LoginScreen(Screen):
